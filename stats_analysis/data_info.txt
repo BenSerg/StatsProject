@@ -33,11 +33,12 @@ M: 1510.750
 σ: 35.508
 
 
-Confidence intervals
+Xi square value with q = 0.01: 18.475
+
 
 M confidence interval: (1483.636, 1527.724)
 σ confidence interval: (24.181, 57.415)
-min(k_i) = 10 > 4. Гипотеза об однородности выборки не противоречитданным выборки
+min(k_i) = 10 > 4
 
 Inversions
 
@@ -51,9 +52,12 @@ u <= 104.776
 u >= 295.224
 
 
+Xi square value with q = 0.05: 14.067
+
+
 M confidence interval: (1489.553, 1521.807)
 σ confidence interval: (26.206, 50.329)
-min(k_i) = 10 > 6. Гипотеза об однородности выборки не противоречитданным выборки
+min(k_i) = 10 > 6
 
 Inversions
 
@@ -67,9 +71,12 @@ u <= 127.543
 u >= 272.457
 
 
+Xi square value with q = 0.1: 12.017
+
+
 M confidence interval: (1492.357, 1519.003)
 σ confidence interval: (27.358, 47.223)
-min(k_i) = 10 > 5. Гипотеза об однородности выборки не противоречитданным выборки
+min(k_i) = 10 > 5
 
 Inversions
 
