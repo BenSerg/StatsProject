@@ -10,6 +10,7 @@ precision = 3
 interval_count = 11
 freedom_degrees = 7
 
+
 def filter_vals(interval: tuple, sample: np.array) -> np.array:
     return sample[np.logical_and(interval[0] <= sample, sample < interval[1])]
 
@@ -62,8 +63,14 @@ def create_report(file_path: str, data_sample: np.array, stats: Stats) -> None:
               f'σ: {sigma:.{precision}f}\n\n', file=stats_file)
         q = [0.01, 0.05, 0.1]
         sign_checkers = [4, 6, 5]
+        M, D, inv_count = inversion_check(data_sample, count=20)
+        print(f'M[u] = {M:.{precision}f}\n'
+              f'D[u] = {D:.{precision}f}\n'
+              f'σ[u] = {np.sqrt(D):.{precision}f}\n'
+              f'Inversions_count = {inv_count}\n', file=stats_file)
         for i in range(3):
-            print(f'Xi square value with q = {q[i]}: {get_chi2(q[i], freedom_degrees):.{precision}f}\n\n', file=stats_file)
+            print(f'Xi square value with q = {q[i]}: {get_chi2(q[i], freedom_degrees):.{precision}f}\n\n',
+                  file=stats_file)
             elms = data_sample[:20]
             m_trusted_interval, sigma_trusted_interval = trusted_intervals(elms, np.float64(q[i]))
             val = sign_check(data_sample, count=20)
@@ -75,11 +82,7 @@ def create_report(file_path: str, data_sample: np.array, stats: Stats) -> None:
             else:
                 print(f'min(k_i) = {val} < {sign_checkers[i]}\n\n', file=stats_file)
             print('Inversions\n', file=stats_file)
-            M, D, inv_count = inversion_check(data_sample, count=20)
-            print(f'M[u] = {M:.{precision}f}\n'
-                  f'D[u] = {D:.{precision}f}\n'
-                  f'σ[u] = {np.sqrt(D):.{precision}f}\n'
-                  f'Inversions_count = {inv_count}\n', file=stats_file)
+
             t_i, *u_interval = critical_district(np.float64(q[i]), M, np.sqrt(D))
             print(f't = {t_i:.{precision}f}\n'
                   f'u <= {u_interval[0]:.{precision}f}\n'
@@ -158,8 +161,8 @@ def chi2_value(interval_list: list[tuple], frequencies: np.array, data_sample: n
                std: np.float64):
     probability_intervals = np.array([probability_in_interval(i, mean_value, std) for i in interval_list])
     return np.sum(
-            np.power(frequencies - data_sample.size * probability_intervals, 2) /
-            (data_sample.size * probability_intervals))
+        np.power(frequencies - data_sample.size * probability_intervals, 2) /
+        (data_sample.size * probability_intervals))
 
 
 @lru_cache
