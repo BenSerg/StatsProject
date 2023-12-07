@@ -33,6 +33,11 @@ M: 1510.750
 σ: 35.508
 
 
+M[u] = 200.000
+D[u] = 1366.667
+σ[u] = 36.968
+Inversions_count = 184
+
 Xi square value with q = 0.01: 18.475
 
 
@@ -41,11 +46,6 @@ M confidence interval: (1483.636, 1527.724)
 min(k_i) = 10 > 4
 
 Inversions
-
-M[u] = 200.000
-D[u] = 1366.667
-σ[u] = 36.968
-Inversions_count = 184
 
 t = 2.576
 u <= 104.776
@@ -61,11 +61,6 @@ min(k_i) = 10 > 6
 
 Inversions
 
-M[u] = 200.000
-D[u] = 1366.667
-σ[u] = 36.968
-Inversions_count = 184
-
 t = 1.960
 u <= 127.543
 u >= 272.457
@@ -79,11 +74,6 @@ M confidence interval: (1492.357, 1519.003)
 min(k_i) = 10 > 5
 
 Inversions
-
-M[u] = 200.000
-D[u] = 1366.667
-σ[u] = 36.968
-Inversions_count = 184
 
 t = 1.645
 u <= 139.192
