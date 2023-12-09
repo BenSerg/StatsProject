@@ -35,8 +35,8 @@ def create_report(file_path: str, data_sample: np.array, stats: Stats) -> None:
         frequencies = np.array(list(filter_vals(i, data_sample).size for i in interval_list))
         accumulation_frequency = np.add.accumulate(frequencies / data_sample.size)
         norm_cdf_values = [
-            norm.cdf(interval_list[i][1], loc=mean_value, scale=std) - norm.cdf(interval_list[i][0], loc=mean_value,
-                                                                                scale=std) for i in range(11)]
+            norm.cdf(interval_list[i][1], loc=mean_value, scale=std) -
+            norm.cdf(interval_list[i][0], loc=mean_value, scale=std) for i in range(11)]
         norm_accumulate = np.add.accumulate(norm_cdf_values)
         table_rows = [
             [i + 1, interval_list[i][0], interval_list[i][1], np.round(mid_list[i], precision), frequencies[i],
@@ -56,7 +56,7 @@ def create_report(file_path: str, data_sample: np.array, stats: Stats) -> None:
               f'Median: {median:.{precision}f}\n'
               f'Skewness: {skewness:.{precision}f}\n'
               f'Kurtosis: {kurtosis:.{precision}f}\n'
-              f'Xi_square: {xi_square:.{precision}f}\n\n', file=stats_file)
+              f'Chi square: {xi_square:.{precision}f}\n\n', file=stats_file)
         table.add_rows(table_rows)
         print(table, file=stats_file)
         draw_polygon(mid_list, frequencies / data_sample.size)
@@ -75,7 +75,7 @@ def create_report(file_path: str, data_sample: np.array, stats: Stats) -> None:
               f'σ[u] = {np.sqrt(D):.{precision}f}\n'
               f'Inversions_count = {inv_count}\n', file=stats_file)
         for i in range(3):
-            print(f'Xi square value with q = {q[i]}: {get_chi2(q[i], freedom_degrees):.{precision}f}\n\n',
+            print(f'Chi square value with q = {q[i]}: {get_chi2(q[i], freedom_degrees):.{precision}f}\n\n',
                   file=stats_file)
             elms = data_sample[:20]
             m_trusted_interval, sigma_trusted_interval = trusted_intervals(elms, np.float64(q[i]))
