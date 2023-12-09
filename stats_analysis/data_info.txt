@@ -8,7 +8,7 @@ Std: 31.748
 Median: 1507.000
 Skewness: -0.142
 Kurtosis: -0.220
-Xi_square: 11.276
+Chi square: 11.276
 
 
 +------------+--------+--------+---------+----+--------+------------+---------------+-------+
@@ -38,7 +38,7 @@ D[u] = 1366.667
 σ[u] = 36.968
 Inversions_count = 184
 
-Xi square value with q = 0.01: 18.475
+Chi square value with q = 0.01: 18.475
 
 
 M confidence interval: (1483.636, 1527.724)
@@ -52,7 +52,7 @@ u <= 104.776
 u >= 295.224
 
 
-Xi square value with q = 0.05: 14.067
+Chi square value with q = 0.05: 14.067
 
 
 M confidence interval: (1489.553, 1521.807)
@@ -66,7 +66,7 @@ u <= 127.543
 u >= 272.457
 
 
-Xi square value with q = 0.1: 12.017
+Chi square value with q = 0.1: 12.017
 
 
 M confidence interval: (1492.357, 1519.003)
