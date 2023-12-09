@@ -28,15 +28,21 @@ def create_report(file_path: str, data_sample: np.array, stats: Stats) -> None:
     min_value, max_value, mean_value, linspace, median, std, hist, bins, skewness, kurtosis = stats.__dict__.values()
     with open(file=file_path, mode='w', encoding='utf-8') as stats_file:
         table = PrettyTable()
-        table.field_names = ['Interval N', 'Begin', 'End', 'Xi', 'Fi', 'Fi / N', 'acc Fi / N']
+        table.field_names = ['Interval N', 'Begin', 'End', 'Xi', 'Fi', 'Fi / N', 'acc Fi / N', 'norm acc Fi/N', 'diff']
         interval_list = list(
             (np.round(linspace[i - 1], 1), np.round(linspace[i], 1)) for i in range(1, interval_count + 1))
         mid_list = np.array(list(np.mean(i) for i in interval_list))
         frequencies = np.array(list(filter_vals(i, data_sample).size for i in interval_list))
         accumulation_frequency = np.add.accumulate(frequencies / data_sample.size)
+        norm_cdf_values = [
+            norm.cdf(interval_list[i][1], loc=mean_value, scale=std) - norm.cdf(interval_list[i][0], loc=mean_value,
+                                                                                scale=std) for i in range(11)]
+        norm_accumulate = np.add.accumulate(norm_cdf_values)
         table_rows = [
             [i + 1, interval_list[i][0], interval_list[i][1], np.round(mid_list[i], precision), frequencies[i],
-             np.round(frequencies[i] / data_sample.size, 3), np.round(accumulation_frequency[i], 3)]
+             np.round(frequencies[i] / data_sample.size, 3), np.round(accumulation_frequency[i], 3),
+             np.round(norm_accumulate[i], 3),
+             np.round(np.abs(np.round(norm_accumulate[i], 3) - np.round(accumulation_frequency[i], 3)), 3)]
             for i in range(interval_count)
         ]
         xi_square = chi2_value(interval_list, frequencies, data_sample, mean_value, std)
