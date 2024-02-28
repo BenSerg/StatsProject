@@ -6,20 +6,45 @@ from calculations.laplace_function import *
 
 
 class StatsTable:
+    """
+    Класс, представляющий таблицу статистических данных.
+    """
     @staticmethod
     def filter_vals(interval: tuple, sample: np.array) -> np.array:
+        """
+        Фильтрация выборки на принадлежность к заданному интервалу
+        :param interval: интервал
+        :param sample: выборка
+        """
         return sample[np.logical_and(interval[0] <= sample, sample < interval[1])]
 
     @staticmethod
     def calculate_interval_list(linspace):
+        """
+        Вычисление списка интервалов на основе переданного массива равноудаленных точек
+        :param linspace: массив равноудаленных точек
+        """
         return list((np.round(linspace[i - 1], 1), np.round(linspace[i], 1)) for i in range(1, interval_count + 1))
 
     @staticmethod
     def calculate_cumulative_function(interval_list, mean_value, std):
+        """
+        Вычисление значение нормальной функции распределения для заданных интервалов, среднего значения и стандартного отклонения.
+        :param interval_list: список интервалов
+        :param mean_value: среднее значение
+        :param std: стандартное отклонение
+        :return:
+        """
         return [norm.cdf(interval_list[i][1], loc=mean_value, scale=std) -
                 norm.cdf(interval_list[i][0], loc=mean_value, scale=std) for i in range(interval_count)]
 
     def set_table_rows(self, data_sample, norm_accumulate):
+        """
+        Формирование строк таблицы на основе данных выборки и функции нормального распределения
+        :param data_sample: выборка данных
+        :param norm_accumulate: значения накопленной нормальной функции распределения
+        :return:
+        """
         self.table_rows = [
             [i + 1, self.interval_list[i][0], self.interval_list[i][1], np.round(self.mid_list[i], precision),
              self.frequencies[i],

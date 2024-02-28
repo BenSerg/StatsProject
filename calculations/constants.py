@@ -1,3 +1,3 @@
-precision = 3
-interval_count = 11
-freedom_degrees = 7
+precision = 3  # точность вывода информации в отчете
+interval_count = 11  # количество интервалов для формирования таблицы
+freedom_degrees = 7  # степени свободы для расчета хи-квадрата

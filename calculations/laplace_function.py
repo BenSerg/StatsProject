@@ -38,4 +38,5 @@ def quantil_solve(data_sample: np.array) -> np.array:
 
     def quantile_generate(x: np.array) -> list:
         return [(xp1 - x[0]) / x[1] - laplace_reverse(p1), (xp2 - x[0]) / x[1] - laplace_reverse(p2)]
+
     return fsolve(quantile_generate, np.array([1, 1]))
