@@ -71,7 +71,7 @@ Chi square value with q = 0.1: 12.017
 
 M confidence interval: (1492.357, 1519.003)
 σ confidence interval: (27.358, 47.223)
-min(k_i) = 10 > 5
+min(k_i) = 10 > 6
 
 Inversions
 
